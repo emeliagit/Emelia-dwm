@@ -1,48 +1,33 @@
-dwm - dynamic window manager
-============================
-dwm is an extremely fast, small, and dynamic window manager for X.
+# EmeliaDWM
+My DWM config, figure having it up here on Github would probably make it a lot more convenient.
 
+-------- How to install --------
 
-Requirements
-------------
-In order to build dwm you need the Xlib header files.
+After downloading the most recent release from the releases page (https://github.com/emeliagit/EmeliaDWM/releases), extract it into whatever directory you want. I like to extract it to my home directory, but it doesn't really matter where you do it. From here, there are a couple folders that need placing. 
 
+First off, you'll want to place the ".config" folder in your home directory. This should merge with your already existing .config folder, and it should place my Alacritty configuration in it. 
 
-Installation
-------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
+Then, you'll want to place the ".dwm" folder in your home directory. This folder contains an autostart script, which just starts some programs when you login. There's also a line in the "autostart.sh" script that adjusts for my own display, you'll want to delete that line (or comment it out).
 
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
+Third, you'll be left with a folder simply called "dwm", that's the actual DWM folder. It contains DWM as well as some patches and modifications I've made to it. You'll have to compile it in order to install it, so configure stuff before compiling it, and compile it every time you make a change. Feel free to copy it, but don't just go and use it with no modifications, unless you use Linux exactly like I do, configure it to your liking. Also, feel free to use it as a reference for your own configuration.
+ Before compiling it, make sure to place it in your home directory. To compile it, in your terminal, cd into the "dwm" folder included with the release and run "sudo make clean install". This should compile it, and you should not get any errors. If you do get errors, that means that you don't have the proper dependencies installed, so go install those and then compile it.
 
-    make clean install
+Last, you'll want to set up a short cut so you can actually log into it (assuming you're using a login manager). This is quite straightforward and very simple. All you have to do is go into /usr/share/xsessions and make a file called "dwm.desktop" using whatever text editor you like. Inside "dwm.desktop", just put as follows, and you're done:
 
+[Desktop Entry]
+Encoding=UTF-8
+Name=dwm
+Comment=Dynamic window manager
+Exec=dwm
+Icon=dwm
+Type=XSession
 
-Running dwm
------------
-Add the following line to your .xinitrc to start dwm using startx:
+-------- Additional dependencies --------
 
-    exec dwm
-
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
-
-    DISPLAY=foo.bar:1 exec dwm
-
-(This will start dwm on display :1 of the host foo.bar.)
-
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
-
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
-
-
-Configuration
--------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
+Beyond the normal dependencies for DWM, there are some more required to get my configuration to really work. They are as follows:
+- dmenu
+- picom
+- nitrogen (optional, for setting wallpaper)
+- caffeine (optional)
+- xfce4-power-manager
+- networkmanager
